@@ -1,16 +1,21 @@
+export interface Point {
+  x: number;
+  y: number;
+}
+
 export type FrameType = 'sketch' | 'image' | 'model';
 
 export interface Connection {
   id: string;
   from: string;
   to: string;
-  points: Array<{ x: number; y: number }>;
+  points: Array<Point>;
 }
 
 export interface Frame {
   id: string;
   type: FrameType;
-  position: { x: number; y: number };
+  position: Point;
   content: {
     sketch?: ImageData;
     image?: string;

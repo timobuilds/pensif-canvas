@@ -1,6 +1,6 @@
 'use client';
 
-import { Tldraw, createTLStore, defaultShapeUtils } from '@tldraw/tldraw'
+import { Tldraw, createTLStore, defaultShapeUtils, Editor } from '@tldraw/tldraw'
 import '@tldraw/tldraw/tldraw.css'
 import { useCallback, useState, useEffect } from 'react'
 import { SketchFrameUtil } from './frames/SketchFrame'
@@ -10,7 +10,7 @@ import { AIModelManager } from '../ui/ai-manager/AIModelManager'
 import { type ApiUsage, type Project } from '@/app/lib/types/canvas'
 import { updateConnectionPoints } from '@/app/lib/utils/connections'
 import { ConnectionManager } from '@/app/lib/utils/connectionManager'
-import { PresenceManager, type UserPresence } from '@/app/lib/utils/presenceManager'
+import { PresenceManager, type UserPresence } from '@/app/lib/realtime/presenceManager'
 import { UserCursor } from '../ui/presence/UserCursor'
 import { DownloadButton } from '../ui/frame-actions/DownloadButton'
 import { projectStore } from '@/app/lib/storage/projectStore'
@@ -48,7 +48,7 @@ export function Canvas({ project }: CanvasProps) {
     }
   }, [project, apiUsage, spendLimit])
 
-  const handleMount = useCallback((editor: any) => {
+  const handleMount = useCallback((editor: Editor) => {
     // Register custom shapes
     editor.registerShapeUtils([
       SketchFrameUtil,
